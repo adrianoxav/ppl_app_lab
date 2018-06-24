@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/bower_components/materialize/bin/materialize.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/tooltipster/dist/css/tooltipster.bundle.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.css">
+    <link rel="stylesheet" type="text/css" href="./leccionStyle.css">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <title>Añadir Profesor</title>
+  </head>
+  <body>
+    <header id="navbar">
+    </header>
+    <main id="app">
+      <div id="pages">
+
+        <!--        .::Paso 1, SETUP::.           -->
+        <section id="test1" class="col s12 page">
+          <main class="seccion-1 row container">
+            <header class="strike">
+              <h1 class="center-align flow-text">Añadir un Nuevo Profesor</h1>
+            </header>
+            <form  v-on:submit.prevent="addProduct">
+              <section class="row" id="row-nombre">
+                <article class="input-field col s12">
+                  <label for="nombre">Buscar</label>
+
+
+
+                  </article>
+
+
+
+              </section>
+              <section class="row" id="row-codigo">
+                <article class="input-field col s12">
+                  <label for="codigo">Código</label>
+                  <input v-model="curso.codigo" class="form-control " type="text" name="nombre" id="lblNombre" placeholder="código de curso">
+                </article>
+              </section>
+              <section class="row" id="row-anio">
+                <article class="input-field col s12">
+                  <label for="codigo">Año</label>
+                  <input v-model="curso.anio" class="form-control " type="text" name="nombre" id="lblNombre" placeholder="anio de curso">
+                </article>
+              </section>
+              <section class="row" id="row-termino">
+                <article class="input-field col s12">
+                  <label for="codigo">Término</label>
+                  <input v-model="curso.termino" class="form-control " type="text" name="termino" id="lblNombre" placeholder="1s / 2s">
+                </article>
+              </section>
+              <section class="row" id="row-paralelo">
+                <article class="input-field col s12">
+                  <label for="codigo">Paralelo</label>
+                  <input v-model="curso.nombre" class="form-control " type="number" name="paralelo" id="lblNombre" placeholder="1">
+                </article>
+              </section>
+              <div class="form-group">
+                              <button   class="btn btn-primary">Create</button>
+                          </div>
+            </form>
+
+          </main>
+        </section>
+
+
+      </div>
+      <!-- Modal Structure -->
+
+    </main>
+    <footer>
+      <script src="https://vuejs.org/js/vue.js"></script>
+<script src="https://unpkg.com/vue-select@2.4.0/dist/vue-select.js"></script>
+      <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="/bower_components/vue/dist/vue.min.js"></script>
+      <script src="/bower_components/vue-router/dist/vue-router.min.js"></script>
+      <script src="/bower_components/vue-resource/dist/vue-resource.min.js"></script>
+      <script src="/bower_components/materialize/bin/materialize.js"></script>
+      <script src="/bower_components/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+      <script src="/bower_components/moment/moment.js"></script>
+      <script src="/bower_components/pickadate/lib/picker.js"></script>
+      <script src="/bower_components/pickadate/lib/picker.date.js"></script>
+      <script src="./app.curso.js"></script>
+      <script src="/partials/navbar.js"></script>
+      <script src="/js/summernote.js"></script>
+    </footer>
+  </body>
+</html>

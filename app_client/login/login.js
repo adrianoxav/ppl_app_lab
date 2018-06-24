@@ -1,4 +1,4 @@
-function realizarLogin(){
+function realizarLogin(){ 
 	// var credenciales={
 	//  username: "a",
 	//  password: "a",
@@ -34,5 +34,3 @@ function realizarLogin(){
 //     }
 //   })
  //}
-
-

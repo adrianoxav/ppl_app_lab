@@ -15,9 +15,11 @@ const ProfesorSchema = mongoose.Schema({
     type: String,
     'default': require('shortid').generate
   },
-  correo: {
-    type: String
-  },
+  correo:  {
+        type: String,
+        unique: true,
+        required: true
+    },
   nombres: {
     type: String
   },
@@ -26,7 +28,7 @@ const ProfesorSchema = mongoose.Schema({
   },
   tipo: {
     type: String,
-    enum: ['titular', 'peer']
+    enum: ['Titular', 'Asistente']
   },
   nivelPeer: [{
     paralelo: {

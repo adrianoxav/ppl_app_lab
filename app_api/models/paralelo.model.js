@@ -51,7 +51,7 @@ const ParaleloSchema = new mongoose.Schema({
     ref: 'Profesor',
     'default': ''
   },
-  peers: [{
+  asistentes: [{
     type: String,
     ref: 'Profesor',
     'default': ''
@@ -119,7 +119,7 @@ ParaleloSchema.statics = {
   AnadirProfesorPeer({ materiaParalelo, materiaCodigo, profesorId }) {
     const self = this
     return new Promise(function(resolve) {
-      self.update({$and: [{ nombre: materiaParalelo }, { codigo: materiaCodigo }]}, {$addToSet: {'peers': profesorId}}).then((accionEstado) => {
+      self.update({$and: [{ nombre: materiaParalelo }, { codigo: materiaCodigo }]}, {$addToSet: {'asistentes': profesorId}}).then((accionEstado) => {
         resolve(accionEstado.nModified ? true : false)
       })
     })
@@ -204,11 +204,11 @@ ParaleloSchema.statics.obtenerParalelosProfesor = function(id_profesor, callback
 }
 
 ParaleloSchema.statics.obtenerParaleloPeer = function(id_profesor, callback) {
-  this.find({peers: id_profesor}).populate({path: 'grupos estudiantes'}).exec(callback);
+  this.find({asistentes: id_profesor}).populate({path: 'grupos estudiantes'}).exec(callback);
 }
 
 ParaleloSchema.statics.obtenerParaleloPeerCsv = function(id_profesor, callback) {
-  this.find({peers: id_profesor}).populate({
+  this.find({asistentes: id_profesor}).populate({
     path: 'grupos',
     populate: { path: 'estudiantes' },
     select: 'estudiantes nombre'
@@ -226,7 +226,7 @@ ParaleloSchema.statics.obtenerParaleloProfesorCsv = function(id_profesor, callba
 
 /* PEERS*/
 ParaleloSchema.statics.anadirPeerAParalelo = function(id_paralelo, id_profesor, callback) {
-  this.update({_id: id_paralelo}, {$addToSet: {'peers': id_profesor}}, callback);
+  this.update({_id: id_paralelo}, {$addToSet: {'asistentes': id_profesor}}, callback);
 }
 
 /*

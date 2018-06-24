@@ -1,10 +1,17 @@
 var router = require('express').Router();
 const ParalelosController = require('../controllers/paralelos.controller');
 var authApi = require('../config/auth.api')
+var Paralelo = require('../models/paralelo.model.js');
 
-router.get('/', authApi.estudiante, ParalelosController.obtenerTodosParalelos);
-router.get('/:id_paralelo', authApi.estudiante, ParalelosController.obtenerParalelo);
-router.post('/', authApi.profesor, ParalelosController.crearParalelo);
+router.get('/', ParalelosController.obtenerTodosParalelos);
+router.get('/:id_paralelo', ParalelosController.obtenerParalelo);
+
+router.post('/', function(req, res, next) {
+  Paralelo.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 router.put('/:id_paralelo', authApi.profesor, ParalelosController.actualizarParalelo);
 router.delete('/:id_paralelo',authApi.profesor,  ParalelosController.eliminarParalelo);
 
@@ -16,6 +23,22 @@ router.delete('/:id_paralelo/grupos/:id_grupo',authApi.profesor, ParalelosContro
 router.post('/:id_paralelo/profesores/:id_profesor', authApi.profesor, ParalelosController.anadirProfesorAParalelo);
 router.delete('/:id_paralelo/profesores',authApi.profesor,  ParalelosController.eliminarProfesorDeParalelo);
 router.get('/profesores/mis_paralelos', authApi.profesor, ParalelosController.obtenerParalelosProfesor);
+//router.get('/profesores/paralelos_profesor/:idProfesor', authApi.profesor, ParalelosController.obtenerParalelosProfesorCurso);
+
+/* GET SINGLE User BY email */
+router.get('/profesores/paralelos_profesor/:idProfesor', authApi.profesor, function(req, res, next) {
+  console.log(req.params);
+  Paralelo.find({$or: [
+    {profesor: req.params.idProfesor},
+    {asistentes: req.params.idProfesor}
+  ]
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+    console.log(post);
+
+  });
+});
 router.post('/:id_paralelo/peers/:id_profesor',authApi.profesor, ParalelosController.anadirPeerAParalelo)
 
 // estudiantes

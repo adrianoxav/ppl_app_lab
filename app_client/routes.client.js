@@ -171,6 +171,18 @@ module.exports = (app) => {
   app.use('/profesores/preguntas/nueva-pregunta',redirecion, authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/preguntas/nueva-pregunta')));
   app.use('/profesores/leccion/crear',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/leccion/crear')))
   app.use('/profesores/leccion/',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/leccion/')))
+  app.use('/profesores/cursos/crear',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/cursos/crear')));
+  app.use('/profesores/cursos/',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/cursos/')));
+  app.use('/profesores/usuarios/crear',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/usuarios/crear')));
+  app.use('/profesores/usuarios/',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/usuarios/')));
+  app.use('/profesores/usuarios/:id',redirecion, authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/usuarios/ver/')));
+  app.use('/profesores/cursos/:id',redirecion, authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/cursos/ver/')));
+  app.use('/profesores/profesores/crear',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/profesores/crear')));
+  app.use('/profesores/profesores/',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/profesores/')));
+  app.use('/profesores/cursos/ver/:id',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/cursos/ver/add-profesor')));
+  app.use('/profesores/cursos/ver/:id',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/cursos/ver/add-estudiante')));
+
+  app.use('/profesores/profesores/:id',redirecion, authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/profesores/ver/')));
   app.use('/profesores/leccion/calificar/grupos/:id_leccion',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/leccion/calificar/grupos')))
   app.use('/profesores/leccion/calificar/:id_leccion/:id_estudiante/:id_grupo',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/leccion/calificar')))
   app.use('/profesores/lecciones',redirecion,authProfesor, middleProfesorControl, express.static(path.join(__dirname, 'profesores/lecciones')))

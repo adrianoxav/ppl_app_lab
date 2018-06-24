@@ -25,8 +25,9 @@ var app = new Vue({
       });
 		},
     obtenerTodosParalelosProfesor: function() {
-      this.$http.get(`/api/paralelos/profesores/mis_paralelos`).then(response => {
-        this.paralelos = response.body.datos
+      this.$http.get(`/api/paralelos/profesores/paralelos_profesor/`+this.profesor._id).then(response => {
+        console.log(response);
+        this.paralelos = response.body
         if (this.contador_global == 0) {
           this.paralelo_seleccionado = app.paralelos[0]._id
         }
@@ -282,7 +283,7 @@ var app = new Vue({
   updated() {
     listeners() // OJO listenrs paralelo
     selector()
-    
+
   }
 });
 app.profesorLogeado()

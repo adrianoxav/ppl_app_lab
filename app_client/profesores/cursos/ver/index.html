@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Ver Curso</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/bower_components/materialize/bin/materialize.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/css/navbar.css">
+		<link rel="stylesheet" type="text/css" href="./verLeccionStyles.css">
+	</head>
+	<body>
+		<header id="navbar"></header>
+		<main>
+			<div class="container" id="appVerCurso">
+				<h2 class="center-align title">Información general del Curso</h2>
+				<section id="leccion-section">
+					<p class="flow-text"><span class="title">Nombre:                </span> {{curso.nombreMateria}}</p>
+			        <p class="flow-text"><span class="title">Código: </span> {{curso.codigo}}</p>
+			        <p class="flow-text"><span class="title">Paralelo:       </span> {{curso.nombre}}</p>
+			        <p class="flow-text"><span class="title">Término:         </span> {{curso.termino}}</p>
+
+
+
+							<h4>Profesores del Paralelo</h4>
+							<header class="col l1 valign-wrapper pull right">
+								<a :href="'/profesores/cursos/ver/'+curso._id" class="tooltipped btn-floating waves-effect waves-light btn red pull right" data-position="top" data-delay="50" data-tooltip="Crear"><i class="material-icons">add</i></a>
+							</header>
+							<table id="1" class="bordered highlight responsive-table">
+				<thead>
+					<tr>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Correo</th>
+						<th>Tipo</th>
+
+
+
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr  v-for="profe in profes">
+						<td>{{ profe.nombres }}</td>
+						<td>{{ profe.apellidos }}</td>
+						<td>{{ profe.correo }}</td>
+						<td>{{ profe.tipo }}</td>
+
+
+
+					</tr>
+				</tbody>
+				</table>
+
+		    <h3>Estudiantes del Paralelo</h4>
+					<table id="2" class="bordered highlight responsive-table">
+		<thead>
+			<tr>
+				<th>Matrícula</th>
+				<th>Correo</th>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+				<th>Carrera</th>
+				<th>Grupo</th>
+
+
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr  v-for="est in estu">
+				<td>{{ est.matricula }}</td>
+				<td>{{ est.correo }}</td>
+				<td>{{ est.nombres }}</td>
+				<td>{{ est.apellidos }}</td>
+				<td>{{ est.carrera }}</td>
+				<td>{{ est.grupo }}</td>
+
+
+			</tr>
+		</tbody>
+		</table>
+
+		<h4>Agregar del Paralelo</h4
+
+				<label for="file">Subir Archivo de Excel .xlsx</label>
+								<input type="file" class="form-control" id="file" :accept="_SheetJSFT" @change="_change" />
+
+
+				<button type="button" class="btn btn-info" v-on:click="crearEstudiantesCurso()" >Añadir Estudiantes al Curso</button>
+
+
+								<table id="3" class="bordered highlight responsive-table">
+		      <thead>
+		        <tr>
+		          <th>Matrícula</th>
+		          <th>Correo</th>
+		          <th>Nombres</th>
+		          <th>Apellidos</th>
+		          <th>Carrera</th>
+		          <th>Grupo</th>
+
+
+
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr  v-for="list in lista">
+		          <td>{{ list.matricula }}</td>
+		          <td>{{ list.correo }}</td>
+		          <td>{{ list.nombres }}</td>
+		          <td>{{ list.apellidos }}</td>
+		          <td>{{ list.carrera }}</td>
+		          <td>{{ list.grupo }}</td>
+
+
+		        </tr>
+		      </tbody>
+		    </table>
+			</section>
+		  </div>
+		</main>
+
+		<footer>
+			<script type="text/javascript" src="shim.js"></script>
+			<script type="text/javascript" src="xlsx.full.min.js"></script>
+			<script src="/bower_components/jquery/dist/jquery.js"></script>
+			<script src="/bower_components/vue/dist/vue.js"></script>
+			<script src="/bower_components/vue-resource/dist/vue-resource.min.js"></script>
+			<script src="/bower_components/materialize/bin/materialize.js"></script>
+			<script src="/bower_components/moment/moment.js"></script>
+			<script src="./verLeccionScript.js"></script>
+			<script src="/partials/navbar.js"></script>
+		</footer>
+	</body>
+</html>

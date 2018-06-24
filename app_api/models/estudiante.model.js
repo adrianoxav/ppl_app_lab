@@ -24,9 +24,17 @@ const EstudianteSchema = mongoose.Schema({
 	apellidos: {
 		type: String
 	},
-	correo: {
-		type: String
-	},
+  carrera: {
+    type: String
+  },
+  password: {
+    type: String
+  },
+	correo:  {
+        type: String,
+        unique: true,
+        required: true
+    },
 	matricula: {
 		type: String
 	},

@@ -6,6 +6,7 @@
 var authApi = require('../config/auth.api')
 var router = require('express').Router();
 const EstudiantesController = require('../controllers/estudiantes.controller');
+var Estudiante = require('../models/estudiante.model.js');
 
 // Estudiante CRUD
 /**
@@ -15,6 +16,15 @@ const EstudiantesController = require('../controllers/estudiantes.controller');
   * @apiPermission Estudiantes Profesores
   * @apiDescription Obtener todos los estudiantes
 **/
+router.get('/correo/:correo', function(req, res, next) {
+  Estudiante.findOne({
+    correo: req.params.correo
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 router.get('/',authApi.estudiante, EstudiantesController.obtenerTodosEstudiantes);
 
 /**
@@ -71,7 +81,7 @@ router.get('/',authApi.estudiante, EstudiantesController.obtenerTodosEstudiantes
   *
   * @apiSampleRequest off
 **/
-router.get('/:id_estudiante',authApi.estudiante, EstudiantesController.obtenerEstudiante);
+router.get('/:id_estudiante', EstudiantesController.obtenerEstudiante);
 
 /**
   * @api {post} estudiantes Crear un estudiante
@@ -79,8 +89,12 @@ router.get('/:id_estudiante',authApi.estudiante, EstudiantesController.obtenerEs
   * @apiGroup Estudiantes
   *  @apiUse MySuccess
 **/
-router.post('/', authApi.profesor, EstudiantesController.crearEstudiante);
-
+router.post('/',  authApi.profesor,function(req, res, next) {
+  Estudiante.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 /**
   * @api {put} estudiantes/calificar/leccion/:id_leccion/estudiante/:id_estudiante Calificar leccion de estudiante
   * @apiName CalificarLeccion
@@ -90,6 +104,28 @@ router.post('/', authApi.profesor, EstudiantesController.crearEstudiante);
   *       "_id": "B1-gxdLCJ-"
   *     }
 **/
+
+router.post('/signup',authApi.profesor, function(req, res) {
+
+    var newUser = new Estudiante({
+      correo: req.body.correo,
+      password: req.body.matricula,
+      nombres: req.body.nombres,
+      apellidos: req.body.apellidos,
+      matricula: req.body.matricula,
+      carrera: req.body.carrera
+
+    });
+    // save the user
+    newUser.save(function(err,post) {
+      if (err) {
+        return res.json({success: false, msg: 'email already exists.'});
+      }
+      res.json(post);
+    });
+
+});
+
 router.put('/calificar/leccion/:id_leccion/estudiante/:id_estudiante', authApi.profesor, EstudiantesController.calificarLeccion)
 
 /**

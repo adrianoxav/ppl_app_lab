@@ -4,7 +4,7 @@ var app = new Vue({
 		this.obtenerUsuario();
 	},
 	mounted: function(){
-		this.inicializarMaterialize();		
+		this.inicializarMaterialize();
 	},
 	el: '#lecciones',
 	data: {
@@ -57,6 +57,8 @@ var app = new Vue({
     	$.get({
     		url: '/api/paralelos/',
     		success: function(res){
+					console.error(res);
+
     			app.paralelos = app.filtrarParalelos(res.datos);
     			app.getLecciones();
     		},
@@ -450,5 +452,5 @@ function filtrarPorParalelo(lecciones, paralelo){
 	if( paralelo === "" || paralelo === null ){
 		return lecciones;
 	}
-	return 	$.grep(lecciones, (value, index) => { return value.nombreParalelo === paralelo;	});	
+	return 	$.grep(lecciones, (value, index) => { return value.nombreParalelo === paralelo;	});
 }

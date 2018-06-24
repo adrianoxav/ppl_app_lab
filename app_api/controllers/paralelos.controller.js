@@ -3,7 +3,8 @@ const GrupoModel = require('../models/grupo.model');
 var respuesta = require('../utils/responses');
 const utils = require('../utils')
 var co = require('co')
-
+let _ 							= require('lodash');
+let unstream 				= require('unstream');
 const obtenerTodosParalelos = (req, res) => {
   ParaleloModel.obtenerTodosParalelos((err,paralelos) => {
     if(err) return respuesta.serverError(res);
@@ -59,11 +60,17 @@ const obtenerParaleloParaLeccion = (req, res) => {
 
 // TODO: Verificar que existe profesor y estudiante
 const crearParalelo = (req, res) => {
+  console.log(req.body);
   let paralelo = new ParaleloModel({
     nombre: req.body.nombre,
-    limiteEstudiantes: req.body.limiteEstudiantes,
-    horario: req.body.horario,
-    diasClase: req.body.diasClase
+    nombreMateria: req.body.nombreMateria,
+    codigo: req.body.codigo,
+    anio: req.body.anio,
+    termino: req.body.termino,
+    leccionYaComenzo: false,
+    dandoLeccion: false
+
+
   })
   paralelo.crearParalelo((err, doc) => {
 	  if (err) return respuesta.serverError(res);
@@ -148,6 +155,25 @@ const obtenerParalelosProfesor = (req, res) => {
 	})
 }
 
+const obtenerParalelosProfesorCurso = (req, res) => {
+	ParaleloModel.obtenerParalelosProfesor(req.params.idProfesor, (err, paralelos) => {
+		if (err) return respuesta.serverError(res);
+    if (paralelos.length == 0) {
+      ParaleloModel.obtenerParaleloPeer(req.params.idProfesor, (err, paralelos) => {
+        return respuesta.ok(res, paralelos)
+      })
+    } else {
+      return respuesta.ok(res, paralelos)
+    }
+	})
+}
+
+const obtenerParaleloDeEstudiante = (req, res) => {
+  ParaleloModel.obtenerParaleloDeEstudiante(req.params.id_estudiante, (err, doc) => {
+    if(err) return respuesta.serverError(res);
+    return respuesta.ok(res, doc);
+  })
+}
 
 const anadirPeerAParalelo = (req, res) => {
   const {id_paralelo, id_profesor} = req.params
@@ -178,12 +204,6 @@ const eliminarEstudianteDeParalelo = (req, res) => {
   })
 }
 
-const obtenerParaleloDeEstudiante = (req, res) => {
-  ParaleloModel.obtenerParaleloDeEstudiante(req.params.id_estudiante, (err, doc) => {
-    if(err) return respuesta.serverError(res);
-    return respuesta.ok(res, doc);
-  })
-}
 
 
 /*

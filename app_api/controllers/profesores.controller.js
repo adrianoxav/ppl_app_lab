@@ -1,4 +1,5 @@
 const ProfesorModel = require('../models/profesor.model')
+var respuesta = require('../utils/responses');
 
 const obtenerTodosProfesores =  (req, res, next) => {
   ProfesorModel.obtenerTodosProfesores(function(err, profesores) {

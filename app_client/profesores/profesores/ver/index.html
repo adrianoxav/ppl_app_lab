@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Ver Profesor</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/bower_components/materialize/bin/materialize.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/css/navbar.css">
+		<link rel="stylesheet" type="text/css" href="./verLeccionStyles.css">
+	</head>
+	<body>
+		<header id="navbar"></header>
+		<main>
+			<div class="container" id="appVerCurso">
+				<h4 class="center-align title">Información general del Curso</h4>
+				<section id="leccion-section">
+					<p class="flow-text"><span class="title">Nombres:                </span> {{profesor.nombres}}</p>
+			        <p class="flow-text"><span class="title">Apellidos: </span> {{profesor.apellidos}}</p>
+			        <p class="flow-text"><span class="title">Tipo:       </span> {{profesor.tipo}}</p>
+			        <p class="flow-text"><span class="title">Correo:         </span> {{profesor.correo}}</p>
+
+							<h2>Cursos Asignados</h2>
+
+
+
+
+											<section class="col s12">
+												<table class="bordered highlight responsive-table">
+													<thead>
+														<tr>
+															<th>Código</th>
+															<th>Materia</th>
+															<th>Paralelo</th>
+															<th>Término</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr v-for="curso in cursos">
+															<td class="text-flow">{{curso.codigo}}</td>
+															<td class="text-flow">{{curso.nombreMateria}}</td>
+															<td class="text-flow">{{curso.nombre}}</td>
+															<td class="text-flow">{{curso.termino}}</td>
+
+
+
+														</tr>
+													</tbody>
+												</table>
+											</section>
+
+
+		  </div>
+		</main>
+
+		<footer>
+
+			<script src="/bower_components/jquery/dist/jquery.js"></script>
+			<script src="/bower_components/vue/dist/vue.js"></script>
+			<script src="/bower_components/vue-resource/dist/vue-resource.min.js"></script>
+			<script src="/bower_components/materialize/bin/materialize.js"></script>
+			<script src="/bower_components/moment/moment.js"></script>
+			<script src="./verLeccionScript.js"></script>
+			<script src="/partials/navbar.js"></script>
+		</footer>
+	</body>
+</html>
